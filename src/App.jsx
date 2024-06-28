@@ -1,10 +1,57 @@
 import './App.css';
+
 import StartScreen from './components/StartScreen';
 
+import { useCallback, useEffect, useState } from 'react';
+
+import { wordsList } from './data/word';
+import Game from './components/Game';
+import GameOver from './components/GameOver';
+
+const stages = [
+  {id: 1, name: 'start'},
+  {id: 2, name: 'game'},
+  {id: 3, name: 'end'}
+];
+
 function App() {
+  const [gameStage, setGameStage] = useState(stages[0].name);
+  const words = useState(wordsList);
+
+  const startGame = () => {
+    pickWordAndCategory();
+    setGameStage(stages[1].name);
+  };
+
+  const verifyLetter = () => {
+    setGameStage(stages[2].name);
+  };
+
+  const retry = () => {
+    
+  };
+
+  const [pickedWord, setPickedWord] = useState('');
+  const [pickedCategory, setPickedCategory] = useState('');
+  const [letters, setLetters] = useState([]);
+
+  const pickWordAndCategory = () => {
+    const categories = Object.keys(words);
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
+
+    // pick a random word
+    const word =
+      words[category][Math.floor(Math.random() * words[category].length)];
+
+    console.log(categories[0].name);
+  }
+
   return (
     <div className="App">
-      <StartScreen/>
+      {gameStage === 'start' && <StartScreen startGame={startGame} test={pickWordAndCategory}/>}
+      {gameStage === 'game' && <Game verifyLetter={verifyLetter}/>}
+      {gameStage === 'end' && <GameOver retry={retry}/>}
     </div>
   );
 }
