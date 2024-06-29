@@ -7,13 +7,13 @@ game h1 {
 }
 
 .tip span {
-  color: #ecfa00;
+  color: #1646a0;
 }
 
 .wordContainer {
   margin: 2.5em;
   padding: 1.5em;
-  border: 20px solid #ecfa00;
+  border: 20px solid #1646a0;
   display: flex;
 }
 
